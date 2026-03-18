@@ -8,43 +8,43 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--red:#cc0000;--red-dark:#990000;--yellow:#f5c800;--black:#0d0d0d;--dark:#111111;--dark2:#1a1a1a;--white:#ffffff;--gray:#aaaaaa;--gray-light:#f0f0f0}
-html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;cursor:none}
+
+/* ── Smooth scroll ── */
+html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;cursor:none;-webkit-overflow-scrolling:touch}
+
 #cursor{width:8px;height:8px;background:var(--red);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s}
 #cursor-ring{width:30px;height:30px;border:1.5px solid rgba(204,0,0,.4);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;background:transparent;border-bottom:1px solid transparent;transition:background .4s,border-color .4s,backdrop-filter .4s,padding .4s}
 nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.07);padding:14px 40px}
 .nav-logo{display:flex;align-items:center;text-decoration:none}
-.nav-logo img{height: 90px;px;width:auto;display:block}
+.nav-logo img{height:90px;width:auto;display:block}
 .nav-links{display:flex;gap:40px;list-style:none}
 .nav-links a{text-decoration:none;color:var(--white);font-size:.75rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color .2s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--red);transition:width .3s}
 .nav-links a:hover{color:var(--red)}
 .nav-links a:hover::after,.nav-links a.active::after{width:100%}
 .nav-links a.active{color:var(--red)}
-#home{min-height:100vh;background:radial-gradient(ellipse at 60% 50%,#c50000 0%,#8b0000 40%,#3a0000 70%,#0d0d0d 100%);display:flex;align-items:center;padding:100px 60px 60px;position:relative;overflow:hidden}
-.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.08) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
-.hero-glow{position:absolute;top:10%;right:20%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,180,0,.15) 0%,transparent 70%);pointer-events:none}
-.hero-content{flex:1;max-width:560px;position:relative;z-index:2}
-.hero-title{font-family:'Dancing Script',cursive;font-size:clamp(4rem,8vw,8rem);line-height:.9;color:var(--white);margin-bottom:10px;animation:fadeUp .9s ease both}
-.hero-subtitle{font-size:clamp(1.2rem,2.5vw,2rem);font-weight:300;color:rgba(255,255,255,.85);margin-bottom:50px;letter-spacing:2px;animation:fadeUp .9s .2s ease both}
-.hero-subtitle strong{font-weight:700}
-.hero-btns{display:flex;flex-direction:column;gap:16px;max-width:300px;animation:fadeUp .9s .4s ease both}
-.btn-yellow{display:flex;align-items:center;justify-content:space-between;background:var(--yellow);color:var(--black);padding:16px 24px;border-radius:50px;font-weight:800;font-size:.9rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:transform .25s,box-shadow .25s}
+
+/* ── HERO ── */
+#home{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.01);z-index:1}
+.hero-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:16px;position:absolute;bottom:120px;left:60px;}
+.btn-yellow{display:flex;align-items:center;justify-content:space-between;background:var(--yellow);color:var(--black);padding:16px 24px;border-radius:50px;font-weight:800;font-size:.9rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:transform .25s,box-shadow .25s;min-width:260px}
 .btn-yellow:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(245,200,0,.4)}
-.btn-dark{display:flex;align-items:center;justify-content:space-between;background:#222;color:var(--white);padding:16px 24px;border-radius:50px;font-weight:700;font-size:.9rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:transform .25s,box-shadow .25s}
+.btn-dark{display:flex;align-items:center;justify-content:space-between;background:#222;color:var(--white);padding:16px 24px;border-radius:50px;font-weight:700;font-size:.9rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;transition:transform .25s,box-shadow .25s;min-width:260px}
 .btn-dark:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,.5)}
-.btn-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.btn-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .btn-yellow .btn-icon{background:var(--black)}
 .btn-dark .btn-icon{background:var(--yellow)}
-.hero-visual{flex:1;display:flex;justify-content:center;align-items:center;position:relative;z-index:2;animation:fadeIn 1s .3s ease both}
-.hero-monitor-wrap{position:relative;width:500px;height:400px}
-.monitor-svg{width:400px;height:350px}
-.section-banner{background:var(--red);padding:36px 60px;display:flex;align-items:center;gap:30px;opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease}
-.section-banner.visible{opacity:1;transform:translateX(0)}
+
+.section-banner{background:var(--red);padding:36px 60px;display:flex;align-items:center;gap:30px}
 .section-banner h2{font-family:'Anton',sans-serif;font-size:clamp(2.5rem,5vw,4rem);color:var(--white);letter-spacing:2px}
 .section-banner p{font-size:.9rem;color:rgba(255,255,255,.85);max-width:480px;line-height:1.6}
 .banner-divider{flex:1}
+
 #services{background:var(--dark)}
 .services-intro{padding:80px 60px 60px;display:grid;grid-template-columns:repeat(3,1fr);gap:60px}
 .service-icon{width:80px;height:80px;margin-bottom:24px;opacity:.85}
@@ -54,33 +54,34 @@ nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);border-bottom
 .service-card a:hover{opacity:.7;letter-spacing:3px}
 .service-card{transition:transform .3s ease}
 .service-card:hover{transform:translateY(-6px)}
-.services-watermark{padding:40px 60px 60px;text-align:center}
-.services-watermark .wm-text{font-family:'Dancing Script',cursive;font-size:4rem;color:rgba(255,255,255,.06);line-height:1}
+.services-watermark{padding:40px 60px 60px;display:flex;justify-content:center;align-items:center}
+
 #graphic-design{background:var(--dark)}
 .gallery-filter{display:flex;gap:40px;padding:40px 60px 20px;border-bottom:1px solid rgba(255,255,255,.07)}
 .filter-btn{background:none;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:1px;color:var(--gray);transition:color .2s;text-transform:uppercase;padding-bottom:6px;border-bottom:2px solid transparent}
 .filter-btn.active,.filter-btn:hover{color:var(--white);border-color:var(--red)}
 .gallery-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;padding:20px 60px 60px}
-.gallery-item{aspect-ratio:1;background:var(--dark2);overflow:hidden;cursor:pointer;position:relative;opacity:0;transform:scale(.96) translateY(20px);transition:opacity .6s ease,transform .6s ease}
-.gallery-item.visible{opacity:1;transform:scale(1) translateY(0)}
+.gallery-item{aspect-ratio:1;background:var(--dark2);overflow:hidden;cursor:pointer;position:relative}
 .gallery-item:hover .gallery-overlay{opacity:1}
 .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
 .gallery-item:hover img{transform:scale(1.07)}
 .gallery-overlay{position:absolute;inset:0;background:rgba(204,0,0,.7);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .35s}
 .gallery-overlay svg{width:40px;height:40px;color:white}
-.gallery-item > *:first-child{transition:transform .5s ease}
-.gallery-item:hover > *:first-child{transform:scale(1.06)}
+.gallery-item>*:first-child{transition:transform .5s ease}
+.gallery-item:hover>*:first-child{transform:scale(1.06)}
 .tile-1{background:linear-gradient(135deg,#1a3a6b,#2d6bd4)}.tile-2{background:linear-gradient(135deg,#111,#333)}.tile-3{background:linear-gradient(135deg,#ff6b1a,#cc3300)}.tile-4{background:linear-gradient(135deg,#1a8a3a,#2dc44a)}.tile-5{background:linear-gradient(135deg,#6b1a8a,#c44adc)}.tile-6{background:linear-gradient(135deg,#ff1a6b,#cc0066)}.tile-7{background:linear-gradient(135deg,#1a6b8a,#2ab4dc)}.tile-8{background:linear-gradient(135deg,#8a6b1a,#dca42a)}.tile-9{background:linear-gradient(135deg,#333,#555)}.tile-10{background:linear-gradient(135deg,#8a1a1a,#cc3333)}
+
 #stickers{background:var(--dark)}
 .photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:20px 60px 60px}
-.photo-item{aspect-ratio:4/3;background:var(--dark2);overflow:hidden;position:relative;opacity:0;transform:scale(.96) translateY(20px);transition:opacity .6s ease,transform .6s ease}
-.photo-item.visible{opacity:1;transform:scale(1) translateY(0)}
-.photo-item > *:first-child{transition:transform .5s ease}
-.photo-item:hover > *:first-child{transform:scale(1.05)}
+.photo-item{aspect-ratio:4/3;background:var(--dark2);overflow:hidden;position:relative}
+.photo-item>*:first-child{transition:transform .5s ease}
+.photo-item:hover>*:first-child{transform:scale(1.05)}
 .photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:1.2rem;color:rgba(255,255,255,.15);letter-spacing:2px}
 .s1{background:linear-gradient(135deg,#1a1a1a,#2a1a00)}.s2{background:linear-gradient(135deg,#001a3a,#1a3a6b)}.s3{background:linear-gradient(135deg,#1a2a1a,#0a3a0a)}.s4{background:linear-gradient(135deg,#1a1a2a,#2a2a4a)}.s5{background:linear-gradient(135deg,#2a1a1a,#3a1a1a)}.s6{background:linear-gradient(135deg,#001a2a,#002a3a)}.s7{background:linear-gradient(135deg,#1a2a00,#2a3a00)}.s8{background:linear-gradient(135deg,#2a2a2a,#1a1a1a)}
+
 #heat-transfer{background:var(--dark)}
 .h1{background:linear-gradient(135deg,#3a2a1a,#4a3a2a)}.h2{background:linear-gradient(135deg,#3a0000,#5a1a1a)}.h3{background:linear-gradient(135deg,#2a3a2a,#1a2a1a)}.h4{background:linear-gradient(135deg,#1a2a3a,#2a3a4a)}.h5{background:linear-gradient(135deg,#3a3a2a,#4a4a2a)}.h6{background:linear-gradient(135deg,#1a1a3a,#2a2a4a)}.h7{background:linear-gradient(135deg,#2a1a3a,#3a2a4a)}.h8{background:linear-gradient(135deg,#1a3a3a,#0a2a2a)}
+
 #testimonials{background:var(--white);color:var(--black);padding:80px 60px}
 .testimonials-title{text-align:center;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:300;margin-bottom:60px}
 .testimonials-title strong{font-weight:800}
@@ -98,16 +99,15 @@ nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);border-bottom
 .client-logos{display:flex;justify-content:center;align-items:center;gap:50px;margin-top:60px;flex-wrap:wrap}
 .client-logo-item{font-family:'Anton',sans-serif;font-size:1.1rem;color:#888;letter-spacing:1px;transition:color .2s,transform .2s}
 .client-logo-item:hover{color:var(--red);transform:translateY(-2px)}
+
 #about{background:var(--dark)}
 .about-content{padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.about-text p{color:rgba(255,255,255,.75);font-size:.92rem;line-height:1.9;margin-bottom:20px;opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-.about-text p.visible{opacity:1;transform:translateY(0)}
 .about-differentiators h3{font-family:'Anton';font-size:1.5rem;letter-spacing:1px;margin-bottom:24px;color:var(--white)}
-.diff-item{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start;opacity:0;transform:translateX(-20px);transition:opacity .6s ease,transform .6s ease}
-.diff-item.visible{opacity:1;transform:translateX(0)}
+.diff-item{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
 .diff-dot{width:10px;height:10px;background:var(--red);border-radius:50%;flex-shrink:0;margin-top:6px}
 .diff-item strong{color:var(--white);display:block;margin-bottom:4px;font-size:.9rem}
 .diff-item span{color:var(--gray);font-size:.85rem;line-height:1.6}
+
 #team{background:var(--white);color:var(--black);padding:80px 60px}
 .team-title{text-align:center;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:300;margin-bottom:60px}
 .team-title strong{font-weight:800}
@@ -119,6 +119,7 @@ nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);border-bottom
 .team-initial{font-family:'Anton';font-size:5rem;color:rgba(255,255,255,.4)}
 .team-card h4{font-weight:800;font-size:1.1rem;margin-bottom:4px}
 .team-card span{color:#888;font-size:.9rem}
+
 #contact{background:var(--black);padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .contact-left h2{font-family:'Anton';font-size:clamp(2.5rem,4vw,3.5rem);line-height:1.1;margin-bottom:20px}
 .contact-left h2 span{color:var(--red)}
@@ -133,25 +134,20 @@ nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);border-bottom
 .form-textarea{resize:none;height:120px}
 .form-submit{background:var(--red);color:var(--white);border:none;padding:16px 32px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:background .2s,transform .2s;align-self:flex-start}
 .form-submit:hover{background:var(--red-dark);transform:translateY(-2px)}
+
 footer{background:#080808;padding:30px 60px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.05)}
 .footer-brand{font-family:'Bebas Neue';font-size:1.2rem;letter-spacing:3px;color:#555}
 .footer-copy{font-size:.78rem;color:#444}
 .footer-links{display:flex;gap:24px}
 .footer-links a{color:#555;font-size:.78rem;text-decoration:none;letter-spacing:1px;transition:color .2s}
 .footer-links a:hover{color:var(--red)}
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .85s ease,transform .85s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-stagger > *{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
-.reveal-stagger.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:0s}
-.reveal-stagger.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.15s}
-.reveal-stagger.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.3s}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
 @media(max-width:900px){
   nav,nav.scrolled{padding:12px 20px}
-  .nav-logo img{height:40px}
-  #home{flex-direction:column;padding:100px 24px 60px}
-  .hero-visual{display:none}
+  .nav-logo img{height:50px}
   .services-intro{grid-template-columns:1fr;padding:40px 24px}
   .gallery-grid{grid-template-columns:repeat(2,1fr);padding:20px 24px}
   .photo-grid{grid-template-columns:repeat(2,1fr);padding:20px 24px}
@@ -164,13 +160,16 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
   footer{flex-direction:column;gap:12px;padding:24px;text-align:center}
   body{cursor:auto}
   #cursor,#cursor-ring{display:none}
+  .btn-yellow,.btn-dark{min-width:200px}
 }
 </style>
 </head>
 <body>
+
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
+<!-- NAV -->
 <nav id="navbar">
   <a href="#home" class="nav-logo">
     <img src="Stooge_Co_White.png" alt="Stooge Co">
@@ -182,43 +181,32 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
   </ul>
 </nav>
 
+<!-- HERO -->
 <section id="home">
-  <div class="hero-dots"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <img src="Tagline_White.png" alt="creativity lives here....." style="width: 480px; max-width: 100%; animation: fadeUp .9s ease both;">
-    <div class="hero-btns">
-      <a href="#services" class="btn-yellow">OUR SERVICES<span class="btn-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a>
-      <a href="#contact" class="btn-dark">CONTACT US<span class="btn-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span></a>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-monitor-wrap">
-      <svg class="monitor-svg" viewBox="0 0 400 350" fill="none">
-        <rect x="60" y="30" width="280" height="200" rx="6" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
-        <defs><linearGradient id="sg" x1="68" y1="38" x2="332" y2="222" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#ff6600"/><stop offset="50%" stop-color="#cc0000"/><stop offset="100%" stop-color="#990000"/></linearGradient></defs>
-        <rect x="68" y="38" width="264" height="184" rx="3" fill="url(#sg)"/>
-        <path d="M165 105 L183 75 L200 95 L217 75 L235 105 Z" stroke="white" stroke-width="3" fill="none" stroke-linejoin="round"/>
-        <path d="M160 108 L240 108" stroke="white" stroke-width="3" stroke-linecap="round"/>
-        <path d="M168 114 L232 114" stroke="white" stroke-width="2" stroke-linecap="round"/>
-        <text x="200" y="140" text-anchor="middle" fill="white" font-family="Arial" font-weight="900" font-size="14" letter-spacing="2">STOOGE CO</text>
-        <path d="M190 230 L200 260 L210 230" fill="#2a2a2a"/>
-        <rect x="170" y="260" width="60" height="8" rx="4" fill="#333"/>
-        <rect x="120" y="285" width="160" height="30" rx="4" fill="#e0e0e0" opacity="0.9"><animateTransform attributeName="transform" type="translate" values="0,0;0,-4;0,0" dur="4s" repeatCount="indefinite"/></rect>
-        <rect x="20" y="120" width="90" height="70" rx="4" fill="#222" stroke="#444" stroke-width="1.5"><animateTransform attributeName="transform" type="translate" values="0,0;-5,-8;0,0" dur="5s" repeatCount="indefinite"/></rect>
-        <rect x="26" y="126" width="78" height="58" rx="2" fill="#111"/>
-        <line x1="330" y1="60" x2="360" y2="160" stroke="#555" stroke-width="6" stroke-linecap="round"><animateTransform attributeName="transform" type="translate" values="0,0;8,-5;0,0" dur="4.5s" repeatCount="indefinite"/></line>
-        <circle cx="360" cy="162" r="4" fill="#cc0000"><animateTransform attributeName="transform" type="translate" values="0,0;8,-5;0,0" dur="4.5s" repeatCount="indefinite"/></circle>
-        <rect x="310" y="20" width="70" height="50" rx="6" fill="#d0d0d0"><animateTransform attributeName="transform" type="translate" values="0,0;6,-6;0,0" dur="6s" repeatCount="indefinite"/></rect>
-        <ellipse cx="305" cy="265" rx="22" ry="28" fill="#e8e8e8"><animateTransform attributeName="transform" type="translate" values="0,0;4,6;0,0" dur="3.5s" repeatCount="indefinite"/></ellipse>
-      </svg>
-    </div>
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="StoogeCo_Website_Landing_Page.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-center">
+    <a href="#services" class="btn-yellow">
+      OUR SERVICES
+      <span class="btn-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
+    </a>
+    <a href="#contact" class="btn-dark">
+      CONTACT US
+      <span class="btn-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.66A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      </span>
+    </a>
   </div>
 </section>
 
+<!-- SERVICES -->
 <section id="services">
   <div class="section-banner"><h2>OUR SERVICES</h2><div class="banner-divider"></div><p style="font-family:'Dancing Script',cursive;font-size:1.5rem;color:rgba(255,255,255,.7)">Bringing Your Ideas to Life</p></div>
-  <div class="services-intro reveal-stagger">
+  <div class="services-intro">
     <div class="service-card">
       <svg class="service-icon" viewBox="0 0 80 80" fill="none" stroke="white" stroke-width="1.5"><rect x="8" y="14" width="56" height="40" rx="3"/><path d="M28 60 L40 54 L52 60"/><path d="M24 64 L56 64"/><rect x="14" y="20" width="44" height="28" fill="rgba(255,255,255,.05)"/></svg>
       <h3>GRAPHIC DESIGN</h3>
@@ -238,11 +226,12 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
       <a href="#heat-transfer">View Work →</a>
     </div>
   </div>
- <div class="services-watermark" style="display:flex;justify-content:center;align-items:center;">
-  <img src="Tagline_Black.png" alt="creativity lives here....." style="width:700px;max-width:100%;opacity:0.15;">
-</div>
+  <div class="services-watermark">
+    <img src="Tagline_Black.png" alt="creativity lives here....." style="width:600px;max-width:100%;opacity:0.15;">
+  </div>
 </section>
 
+<!-- GRAPHIC DESIGN -->
 <section id="graphic-design">
   <div class="section-banner"><h2>GRAPHIC DESIGN</h2><div class="banner-divider"></div><p>Graphic design is at the heart of every brand. We design with intention and care, paying close attention to every detail.</p></div>
   <div class="gallery-filter">
@@ -265,6 +254,7 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
   </div>
 </section>
 
+<!-- STICKERS -->
 <section id="stickers">
   <div class="section-banner"><h2>STICKERS &amp; DECALS</h2><div class="banner-divider"></div><p>From stickers and labels to banners, wall art, signs, or even vehicle wraps. We'll help get your logo seen by the people who matter.</p></div>
   <div class="photo-grid">
@@ -279,6 +269,7 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
   </div>
 </section>
 
+<!-- HEAT TRANSFER -->
 <section id="heat-transfer">
   <div class="section-banner"><h2>HEAT TRANSFER</h2><div class="banner-divider"></div><p>Perfect for one-off pieces, small batches, or tricky surfaces. Heat transfer vinyl, digitally printed vinyl, and DTF printing.</p></div>
   <div class="photo-grid">
@@ -293,17 +284,18 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
   </div>
 </section>
 
+<!-- TESTIMONIALS -->
 <section id="testimonials">
-  <h2 class="testimonials-title reveal"><strong>Customer</strong> Voices: <strong>Hear What</strong> They Say!</h2>
+  <h2 class="testimonials-title"><strong>Customer</strong> Voices: <strong>Hear What</strong> They Say!</h2>
   <div class="testimonial-carousel">
-    <div class="avatar-row reveal">
+    <div class="avatar-row">
       <div class="avatar" onclick="setTestimonial(0)"><div class="avatar-inner">EAG</div></div>
       <div class="avatar" onclick="setTestimonial(1)"><div class="avatar-inner">CM</div></div>
       <div class="avatar active" onclick="setTestimonial(2)"><div class="avatar-inner">CF</div></div>
       <div class="avatar" onclick="setTestimonial(3)"><div class="avatar-inner">DM</div></div>
       <div class="avatar" onclick="setTestimonial(4)"><div class="avatar-inner">Chf</div></div>
     </div>
-    <div class="testimonial-body reveal" style="position:relative">
+    <div class="testimonial-body" style="position:relative">
       <div class="carousel-arrows">
         <button class="arrow-btn" onclick="prevTestimonial()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></button>
         <button class="arrow-btn" onclick="nextTestimonial()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></button>
@@ -313,7 +305,7 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
       <p class="testimonial-quote" id="t-quote">Working with Stooge Co was an absolute pleasure. Their attention to detail and creative vision transformed our brand completely. Every design they produced was exactly what we envisioned — bold, professional, and unforgettable. We'll definitely be working with them again!</p>
     </div>
   </div>
-  <div class="client-logos reveal">
+  <div class="client-logos">
     <div class="client-logo-item">EAG</div>
     <div class="client-logo-item">CHAMELEON MEDIA</div>
     <div class="client-logo-item">COMMUNITY FIRST</div>
@@ -322,6 +314,7 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="section-banner"><h2>ABOUT US</h2><div class="banner-divider"></div><div style="font-family:'Dancing Script',cursive;font-size:2rem;color:rgba(255,255,255,.6)">creativity lives here.....</div></div>
   <div class="about-content">
@@ -331,7 +324,7 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
       <p>Over the years, we've partnered with startups hungry to make their mark and established brands ready for a refresh. No matter the size of the brief, our goal is constant: deliver standout, impactful design that sparks conversation and drives results.</p>
     </div>
     <div class="about-differentiators">
-      <h3 class="reveal">WHAT SETS US APART</h3>
+      <h3>WHAT SETS US APART</h3>
       <div class="diff-item"><div class="diff-dot"></div><div><strong>Relentlessly Original</strong><span>We push past the obvious to find concepts that surprise and resonate.</span></div></div>
       <div class="diff-item"><div class="diff-dot"></div><div><strong>Detail Obsessed</strong><span>Every line, color choice, and pixel has a purpose.</span></div></div>
       <div class="diff-item"><div class="diff-dot"></div><div><strong>Collaborative to the Core</strong><span>Great work happens when ideas bounce — we keep clients in the loop from sketch to launch.</span></div></div>
@@ -341,17 +334,19 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
   </div>
 </section>
 
+<!-- TEAM -->
 <section id="team">
-  <h2 class="team-title reveal"><strong>Meet</strong> Our Team</h2>
-  <div class="team-grid reveal-stagger">
+  <h2 class="team-title"><strong>Meet</strong> Our Team</h2>
+  <div class="team-grid">
     <div class="team-card"><div class="team-photo"><div class="team-photo-inner"><span class="team-initial">PJ</span></div></div><h4>Patrick Joseph</h4><span>Owner / Art Director</span></div>
     <div class="team-card"><div class="team-photo"><div class="team-photo-inner"><span class="team-initial">RC</span></div></div><h4>Rayshawn Charles</h4><span>Graphic Designer</span></div>
     <div class="team-card"><div class="team-photo"><div class="team-photo-inner"><span class="team-initial">AW</span></div></div><h4>Alyssa Winter</h4><span>Lead Printer</span></div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
-  <div class="contact-left reveal">
+  <div class="contact-left">
     <h2>LET'S CREATE<br>SOMETHING <span>UNFORGETTABLE</span></h2>
     <p>Have a project in mind? We'd love to hear about it. Send us a message and we'll get back to you as soon as possible.</p>
     <div class="contact-info">
@@ -360,7 +355,7 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
       <div class="contact-info-item"><div class="contact-info-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 2H3v16h5l3 3 3-3h7V2z"/></svg></div><span>@StoogeCo on Instagram</span></div>
     </div>
   </div>
-  <div class="contact-form reveal">
+  <div class="contact-form">
     <div class="form-row"><input class="form-input" type="text" placeholder="First Name"><input class="form-input" type="text" placeholder="Last Name"></div>
     <input class="form-input" type="email" placeholder="Email Address">
     <input class="form-input" type="text" placeholder="Subject">
@@ -369,6 +364,7 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-brand">STOOGE CO</div>
   <div class="footer-copy">©Copyright 2025 Stooge Co. All Rights Reserved.</div>
@@ -376,41 +372,233 @@ footer{background:#080808;padding:30px 60px;display:flex;align-items:center;just
 </footer>
 
 <script>
-const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+
+// SMOOTH SCROLL 
+// ══════════════════════════════════════
+(function(){
+  // Only on desktop — mobile has native smooth scroll
+  if(window.innerWidth <= 900) return;
+
+  let currentY = window.scrollY;
+  let targetY  = window.scrollY;
+  let ticking  = false;
+  const ease   = 1.00; // lower = silkier, higher = snappier
+
+  function lerp(a, b, t){ return a + (b - a) * t; }
+
+  function tick(){
+    currentY = lerp(currentY, targetY, ease);
+    const diff = Math.abs(targetY - currentY);
+    if(diff < 0.5){
+      currentY = targetY;
+      ticking = false;
+      window.scrollTo(0, currentY);
+      return;
+    }
+    window.scrollTo(0, currentY);
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('wheel', e => {
+    e.preventDefault();
+    targetY = Math.max(0, Math.min(
+      targetY + e.deltaY * 1.2,
+      document.documentElement.scrollHeight - window.innerHeight
+    ));
+    currentY = window.scrollY;
+    if(!ticking){ ticking = true; requestAnimationFrame(tick); }
+  }, { passive: false });
+
+  // Keep in sync when using keyboard or scrollbar
+  window.addEventListener('scroll', () => {
+    if(!ticking){ targetY = window.scrollY; currentY = window.scrollY; }
+  }, { passive: true });
+})();
+
+// ══════════════════════════════════════
+// CUSTOM CURSOR
+// ══════════════════════════════════════
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-(function loop(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function loop(){
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+  rx += (mx-rx)*.12; ry += (my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
 document.querySelectorAll('a,button,.gallery-item,.photo-item,.team-card,.avatar').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.width='16px';cur.style.height='16px';ring.style.width='50px';ring.style.height='50px'});
-  el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='30px';ring.style.height='30px'});
+  el.addEventListener('mouseenter',()=>{ cur.style.width='16px'; cur.style.height='16px'; ring.style.width='50px'; ring.style.height='50px'; });
+  el.addEventListener('mouseleave',()=>{ cur.style.width='8px'; cur.style.height='8px'; ring.style.width='30px'; ring.style.height='30px'; });
 });
-window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60)});
-const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-const so=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.1});
-document.querySelectorAll('.reveal-stagger').forEach(el=>so.observe(el));
-const bo=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.2});
-document.querySelectorAll('.section-banner').forEach(el=>bo.observe(el));
-const go=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const s=x.target.parentElement.querySelectorAll('.gallery-item,.photo-item');s.forEach((el,i)=>setTimeout(()=>el.classList.add('visible'),i*60));go.unobserve(x.target)}})},{threshold:.05});
-document.querySelectorAll('.gallery-grid,.photo-grid').forEach(g=>{const f=g.querySelector('.gallery-item,.photo-item');if(f)go.observe(f)});
-const po=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.querySelectorAll('p').forEach((p,i)=>setTimeout(()=>p.classList.add('visible'),i*150))})},{threshold:.1});
-document.querySelectorAll('.about-text').forEach(el=>po.observe(el));
-const do2=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.querySelectorAll('.diff-item').forEach((d,i)=>setTimeout(()=>d.classList.add('visible'),i*120))})},{threshold:.1});
-document.querySelectorAll('.about-differentiators').forEach(el=>do2.observe(el));
-const testimonials=[
+
+// ══════════════════════════════════════
+// NAV — transparent → dark on scroll
+// ══════════════════════════════════════
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ══════════════════════════════════════
+// SCROLL REVEAL — Ashley cubic-bezier easing
+// ══════════════════════════════════════
+const CURVE = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+// Section banners — slide in from left
+const bannerObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateX(0)';
+      bannerObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.section-banner').forEach(el => {
+  el.style.cssText += `opacity:0;transform:translateX(-40px);transition:opacity 0.85s ${CURVE},transform 0.85s ${CURVE};`;
+  bannerObs.observe(el);
+});
+
+// General elements — fade up
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      // stagger siblings
+      const sibs = [...e.target.parentElement.children];
+      const idx  = sibs.indexOf(e.target);
+      const delay = idx * 0.1;
+      e.target.style.transitionDelay = delay + 's';
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+      fadeObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+[
+  '.service-card',
+  '.diff-item',
+  '.team-card',
+  '.client-logo-item',
+  '.contact-info-item',
+  '.testimonials-title',
+  '.avatar-row',
+  '.testimonial-body',
+  '.client-logos',
+  '.team-title',
+  '.contact-left h2',
+  '.contact-left p',
+  '.about-differentiators h3'
+].forEach(sel => {
+  document.querySelectorAll(sel).forEach(el => {
+    el.style.cssText += `opacity:0;transform:translateY(32px);transition:opacity 0.9s ${CURVE},transform 0.9s ${CURVE};`;
+    fadeObs.observe(el);
+  });
+});
+
+// About text — line by line
+const paraObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.querySelectorAll('p').forEach((p, i) => {
+        setTimeout(() => {
+          p.style.opacity = '1';
+          p.style.transform = 'translateY(0)';
+        }, i * 180);
+      });
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.about-text').forEach(el => {
+  el.querySelectorAll('p').forEach(p => {
+    p.style.cssText += `opacity:0;transform:translateY(28px);transition:opacity 0.85s ${CURVE},transform 0.85s ${CURVE};`;
+  });
+  paraObs.observe(el);
+});
+
+// Gallery & photo grids — staggered cascade
+const gridObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const items = e.target.parentElement.querySelectorAll('.gallery-item,.photo-item');
+      items.forEach((el, i) => {
+        setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'scale(1) translateY(0)';
+        }, i * 65);
+      });
+      gridObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.gallery-grid,.photo-grid').forEach(g => {
+  g.querySelectorAll('.gallery-item,.photo-item').forEach(el => {
+    el.style.cssText += `opacity:0;transform:scale(0.96) translateY(20px);transition:opacity 0.7s ${CURVE},transform 0.7s ${CURVE};`;
+  });
+  const first = g.querySelector('.gallery-item,.photo-item');
+  if(first) gridObs.observe(first);
+});
+
+// ══════════════════════════════════════
+// SMOOTH ANCHOR SCROLL
+// ══════════════════════════════════════
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target){
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ══════════════════════════════════════
+// NAV ACTIVE STATE
+// ══════════════════════════════════════
+window.addEventListener('scroll', () => {
+  const sp = window.scrollY + 100;
+  document.querySelectorAll('section[id]').forEach(s => {
+    if(sp >= s.offsetTop && sp < s.offsetTop + s.offsetHeight){
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      if(s.id==='about'||s.id==='team') document.querySelector('#nav-about')?.classList.add('active');
+      if(['services','graphic-design','stickers','heat-transfer'].includes(s.id)) document.querySelector('#nav-services')?.classList.add('active');
+      if(s.id==='contact') document.querySelector('#nav-contact')?.classList.add('active');
+    }
+  });
+}, { passive: true });
+
+// ══════════════════════════════════════
+// TESTIMONIALS
+// ══════════════════════════════════════
+const testimonials = [
   {name:"EAG Representative",company:"Environmental Awareness Group",quote:"Stooge Co brought our environmental brand to life with stunning visuals. Their creativity and professionalism are unmatched. We couldn't be happier with the results."},
   {name:"Chris Media",company:"Chameleon Media",quote:"The team at Stooge Co is incredibly talented. They understood our vision immediately and delivered designs that exceeded every expectation we had."},
   {name:"Jime Hunte",company:"Community First Cooperative Credit Union Ltd (CFCCU)",quote:"Working with Stooge Co was an absolute pleasure. Their attention to detail and creative vision transformed our brand completely. Bold, professional, and unforgettable."},
   {name:"Design Lead",company:"DesignMill",quote:"As a design-focused company ourselves, we have high standards. Stooge Co met and surpassed them. True professionals who love what they do."},
   {name:"Chef Mint Team",company:"Chef Mint",quote:"Our new brand identity from Stooge Co has completely changed how customers see us. The response has been overwhelmingly positive since the rebrand."}
 ];
-let ct=2;
-function setTestimonial(i){ct=i;const b=document.querySelector('.testimonial-body');b.style.opacity='0';b.style.transform='translateY(10px)';setTimeout(()=>{document.getElementById('t-name').textContent=testimonials[i].name;document.getElementById('t-company').textContent=testimonials[i].company;document.getElementById('t-quote').textContent=testimonials[i].quote;document.querySelectorAll('.avatar').forEach((a,j)=>a.classList.toggle('active',j===i));b.style.transition='opacity .4s ease,transform .4s ease';b.style.opacity='1';b.style.transform='translateY(0)'},180)}
-function nextTestimonial(){setTestimonial((ct+1)%testimonials.length)}
-function prevTestimonial(){setTestimonial((ct-1+testimonials.length)%testimonials.length)}
-function filterGallery(btn,cat){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
-window.addEventListener('scroll',()=>{let sp=window.scrollY+100;document.querySelectorAll('section[id]').forEach(s=>{if(sp>=s.offsetTop&&sp<s.offsetTop+s.offsetHeight){document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));if(s.id==='about'||s.id==='team')document.querySelector('#nav-about')?.classList.add('active');if(['services','graphic-design','stickers','heat-transfer'].includes(s.id))document.querySelector('#nav-services')?.classList.add('active');if(s.id==='contact')document.querySelector('#nav-contact')?.classList.add('active')}})});
-setInterval(nextTestimonial,5000);
+let ct = 2;
+function setTestimonial(i){
+  ct = i;
+  const b = document.querySelector('.testimonial-body');
+  b.style.opacity = '0'; b.style.transform = 'translateY(10px)';
+  setTimeout(() => {
+    document.getElementById('t-name').textContent = testimonials[i].name;
+    document.getElementById('t-company').textContent = testimonials[i].company;
+    document.getElementById('t-quote').textContent = testimonials[i].quote;
+    document.querySelectorAll('.avatar').forEach((a,j) => a.classList.toggle('active', j===i));
+    b.style.transition = 'opacity .4s ease, transform .4s ease';
+    b.style.opacity = '1'; b.style.transform = 'translateY(0)';
+  }, 180);
+}
+function nextTestimonial(){ setTestimonial((ct+1) % testimonials.length); }
+function prevTestimonial(){ setTestimonial((ct-1+testimonials.length) % testimonials.length); }
+function filterGallery(btn, cat){
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+setInterval(nextTestimonial, 5000);
 </script>
 </body>
 </html>
